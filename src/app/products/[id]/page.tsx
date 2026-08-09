@@ -21,11 +21,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
-      <div className="aspect-square overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
-        {product.imageUrl && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
-        )}
+      <div>
+        <div className="aspect-square overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
+          {product.imageUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
+          )}
+        </div>
+
+        {product.description && <p className="mt-4 opacity-80">{product.description}</p>}
       </div>
 
       <div>
@@ -38,8 +42,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <span className="opacity-50 line-through">{formatPrice(product.compareAtPrice)}</span>
           )}
         </div>
-
-        {product.description && <p className="mt-4 opacity-80">{product.description}</p>}
 
         <p className="mt-4 text-sm opacity-70">
           {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Currently out of stock'}
