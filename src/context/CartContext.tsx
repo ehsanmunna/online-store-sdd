@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Product } from '@/lib/types';
 
-const STORAGE_KEY = 'dropship_store_cart';
+const STORAGE_KEY = 'frozen_store_cart';
 
 export interface CartLine {
   product: Product;

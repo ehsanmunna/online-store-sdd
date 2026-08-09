@@ -5,6 +5,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/Header";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
+import { Footer } from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dropship Store",
+  title: "Frozen Store",
   description: "Shop the latest dropshipped products",
 };
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <AnnouncementBar />
             <Header />
             <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">{children}</main>
+            <Footer />
           </CartProvider>
         </AuthProvider>
       </body>

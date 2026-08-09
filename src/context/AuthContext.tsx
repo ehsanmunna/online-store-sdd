@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { apiFetch } from '@/lib/api';
 import { AuthResponse } from '@/lib/types';
 
-const STORAGE_KEY = 'dropship_store_auth';
+const STORAGE_KEY = 'frozen_store_auth';
 
 interface AuthContextValue {
   user: AuthResponse | null;
