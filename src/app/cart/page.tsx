@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { formatPrice } from '@/lib/currency';
 
 export default function CartPage() {
   const { lines, updateQuantity, removeItem, subTotal } = useCart();
@@ -35,7 +36,7 @@ export default function CartPage() {
               <Link href={`/products/${line.product.id}`} className="font-medium hover:underline">
                 {line.product.name}
               </Link>
-              <p className="text-sm opacity-70">${line.product.price.toFixed(2)} each</p>
+              <p className="text-sm opacity-70">{formatPrice(line.product.price)} each</p>
             </div>
 
             <input
@@ -48,7 +49,7 @@ export default function CartPage() {
             />
 
             <span className="w-20 text-right font-medium">
-              ${(line.product.price * line.quantity).toFixed(2)}
+              {formatPrice(line.product.price * line.quantity)}
             </span>
 
             <button onClick={() => removeItem(line.product.id)} className="text-sm text-red-600 hover:underline">
@@ -59,7 +60,7 @@ export default function CartPage() {
       </div>
 
       <div className="mt-6 flex items-center justify-between border-t border-black/10 pt-4 dark:border-white/10">
-        <span className="text-lg font-semibold">Subtotal: ${subTotal.toFixed(2)}</span>
+        <span className="text-lg font-semibold">Subtotal: {formatPrice(subTotal)}</span>
         <Link
           href="/checkout"
           className="rounded-md bg-black px-6 py-2 text-white dark:bg-white dark:text-black"

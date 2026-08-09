@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { apiFetch } from '@/lib/api';
 import { Order, PagedResult } from '@/lib/types';
+import { formatPrice } from '@/lib/currency';
 
 export default function OrdersPage() {
   const { user, loading: authLoading } = useAuth();
@@ -53,7 +54,7 @@ export default function OrdersPage() {
                 <p className="text-sm opacity-70">{new Date(order.createdAt).toLocaleDateString()}</p>
               </div>
               <div className="text-right">
-                <p className="font-medium">${order.totalAmount.toFixed(2)}</p>
+                <p className="font-medium">{formatPrice(order.totalAmount)}</p>
                 <p className="text-sm opacity-70">{order.status}</p>
               </div>
             </Link>

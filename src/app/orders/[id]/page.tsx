@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { apiFetch } from '@/lib/api';
 import { Order } from '@/lib/types';
+import { formatPrice } from '@/lib/currency';
 
 export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -64,19 +65,19 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
           <h2 className="font-semibold">Order totals</h2>
           <div className="mt-2 flex justify-between text-sm">
             <span>Subtotal</span>
-            <span>${order.subTotal.toFixed(2)}</span>
+            <span>{formatPrice(order.subTotal)}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span>Shipping</span>
-            <span>${order.shippingCost.toFixed(2)}</span>
+            <span>{formatPrice(order.shippingCost)}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span>Tax</span>
-            <span>${order.tax.toFixed(2)}</span>
+            <span>{formatPrice(order.tax)}</span>
           </div>
           <div className="mt-2 flex justify-between border-t border-black/10 pt-2 font-semibold dark:border-white/10">
             <span>Total</span>
-            <span>${order.totalAmount.toFixed(2)}</span>
+            <span>{formatPrice(order.totalAmount)}</span>
           </div>
         </div>
       </div>
@@ -89,7 +90,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
               <span>
                 {item.productName} × {item.quantity}
               </span>
-              <span>${item.lineTotal.toFixed(2)}</span>
+              <span>{formatPrice(item.lineTotal)}</span>
             </div>
           ))}
         </div>

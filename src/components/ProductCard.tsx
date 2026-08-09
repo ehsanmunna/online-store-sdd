@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Product } from '@/lib/types';
+import { formatPrice } from '@/lib/currency';
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -21,9 +22,9 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="text-xs uppercase tracking-wide opacity-60">{product.categoryName}</p>
         <h3 className="mt-1 font-medium">{product.name}</h3>
         <div className="mt-2 flex items-center gap-2">
-          <span className="font-semibold">${product.price.toFixed(2)}</span>
+          <span className="font-semibold">{formatPrice(product.price)}</span>
           {product.compareAtPrice && product.compareAtPrice > product.price && (
-            <span className="text-sm opacity-50 line-through">${product.compareAtPrice.toFixed(2)}</span>
+            <span className="text-sm opacity-50 line-through">{formatPrice(product.compareAtPrice)}</span>
           )}
         </div>
       </div>

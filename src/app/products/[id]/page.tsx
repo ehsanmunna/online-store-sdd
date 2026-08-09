@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { apiFetch, ApiError } from '@/lib/api';
 import { Product } from '@/lib/types';
 import { AddToCartButton } from '@/components/AddToCartButton';
+import { formatPrice } from '@/lib/currency';
 
 async function getProduct(id: string): Promise<Product | null> {
   try {
@@ -32,9 +33,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <h1 className="mt-1 text-2xl font-bold">{product.name}</h1>
 
         <div className="mt-3 flex items-center gap-3">
-          <span className="text-xl font-semibold">${product.price.toFixed(2)}</span>
+          <span className="text-xl font-semibold">{formatPrice(product.price)}</span>
           {product.compareAtPrice && product.compareAtPrice > product.price && (
-            <span className="opacity-50 line-through">${product.compareAtPrice.toFixed(2)}</span>
+            <span className="opacity-50 line-through">{formatPrice(product.compareAtPrice)}</span>
           )}
         </div>
 

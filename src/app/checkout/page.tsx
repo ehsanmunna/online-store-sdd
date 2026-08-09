@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { apiFetch } from '@/lib/api';
 import { Order } from '@/lib/types';
+import { formatPrice } from '@/lib/currency';
 
 export default function CheckoutPage() {
   const { user, loading: authLoading } = useAuth();
@@ -183,13 +184,13 @@ export default function CheckoutPage() {
               <span>
                 {line.product.name} × {line.quantity}
               </span>
-              <span>${(line.product.price * line.quantity).toFixed(2)}</span>
+              <span>{formatPrice(line.product.price * line.quantity)}</span>
             </div>
           ))}
         </div>
         <div className="mt-3 flex justify-between border-t border-black/10 pt-3 font-semibold dark:border-white/10">
           <span>Subtotal</span>
-          <span>${subTotal.toFixed(2)}</span>
+          <span>{formatPrice(subTotal)}</span>
         </div>
       </div>
     </div>
