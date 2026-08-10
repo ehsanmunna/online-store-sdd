@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { apiFetch, ApiError } from '@/lib/api';
 import { Product } from '@/lib/types';
 import { AddToCartButton } from '@/components/AddToCartButton';
+import { WishlistToggleButton } from '@/components/WishlistToggleButton';
 import { formatPrice } from '@/lib/currency';
 
 async function getProduct(id: string): Promise<Product | null> {
@@ -47,8 +48,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Currently out of stock'}
         </p>
 
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-2">
           <AddToCartButton product={product} />
+          <WishlistToggleButton product={product} className="border border-black/10 dark:border-white/10" />
         </div>
       </div>
     </div>

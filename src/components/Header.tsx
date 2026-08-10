@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 function WishlistIcon() {
   return (
@@ -43,6 +44,7 @@ function CartIcon() {
 
 export function Header() {
   const { itemCount } = useCart();
+  const { itemCount: wishlistCount } = useWishlist();
 
   return (
     <header className="border-b border-black/10 dark:border-white/10">
@@ -61,8 +63,13 @@ export function Header() {
         </div>
 
         <nav className="flex items-center gap-6 text-sm">
-          <Link href="/wishlist" aria-label="Wishlist" className="flex items-center">
+          <Link href="/wishlist" aria-label="Wishlist" className="relative flex items-center">
             <WishlistIcon />
+            {wishlistCount > 0 && (
+              <span className="ml-1 rounded-full bg-black px-2 py-0.5 text-xs text-white dark:bg-white dark:text-black">
+                {wishlistCount}
+              </span>
+            )}
           </Link>
           <Link href="/cart" aria-label="Cart" className="relative flex items-center">
             <CartIcon />
