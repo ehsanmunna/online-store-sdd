@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { Product } from '@/lib/types';
 
-export function AddToCartButton({ product }: { product: Product }) {
+export function AddToCartButton({ product, actionsEnd }: { product: Product; actionsEnd?: ReactNode }) {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
@@ -54,6 +54,7 @@ export function AddToCartButton({ product }: { product: Product }) {
         >
           Buy now
         </button>
+        {actionsEnd}
       </div>
     </div>
   );

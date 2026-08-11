@@ -48,9 +48,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Currently out of stock'}
         </p>
 
-        <div className="mt-6 flex items-center gap-2">
-          <AddToCartButton product={product} />
-          <WishlistToggleButton product={product} className="border border-black/10 dark:border-white/10" />
+        <div className="mt-6">
+          <AddToCartButton
+            product={product}
+            actionsEnd={
+              <WishlistToggleButton product={product} className="border border-black/10 dark:border-white/10" />
+            }
+          />
         </div>
       </div>
     </div>
