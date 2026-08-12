@@ -1,8 +1,46 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
+
+const SEARCH_INPUT_CLASSNAME =
+  'w-full max-w-md rounded-full border border-black/10 bg-transparent px-4 py-1.5 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:focus:border-white/30';
+
+function SearchForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlQuery = searchParams.get('q') ?? '';
+  const [query, setQuery] = useState(urlQuery);
+  const [syncedQuery, setSyncedQuery] = useState(urlQuery);
+
+  if (urlQuery !== syncedQuery) {
+    setSyncedQuery(urlQuery);
+    setQuery(urlQuery);
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+  }
+
+  return (
+    <form role="search" onSubmit={handleSubmit} className="w-full max-w-md">
+      <input
+        type="search"
+        placeholder="Search products…"
+        aria-label="Search products"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        className={SEARCH_INPUT_CLASSNAME}
+      />
+    </form>
+  );
+}
 
 function WishlistIcon() {
   return (
@@ -54,12 +92,9 @@ export function Header() {
         </Link>
 
         <div className="flex flex-1 justify-center px-4">
-          <input
-            type="search"
-            placeholder="Search products…"
-            aria-label="Search products"
-            className="w-full max-w-md rounded-full border border-black/10 bg-transparent px-4 py-1.5 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:focus:border-white/30"
-          />
+          <Suspense fallback={<input type="search" placeholder="Search products…" aria-label="Search products" className={SEARCH_INPUT_CLASSNAME} disabled />}>
+            <SearchForm />
+          </Suspense>
         </div>
 
         <nav className="flex items-center gap-6 text-sm">

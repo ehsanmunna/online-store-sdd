@@ -56,9 +56,9 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
           <p className="text-sm">{order.shippingAddressLine1}</p>
           {order.shippingAddressLine2 && <p className="text-sm">{order.shippingAddressLine2}</p>}
           <p className="text-sm">
-            {order.shippingCity}, {order.shippingState} {order.shippingPostalCode}
+            {order.shippingCity} {order.shippingPostalCode}
           </p>
-          <p className="text-sm">{order.shippingCountry}</p>
+          <p className="text-sm">{order.shippingPhone}</p>
         </div>
 
         <div className="rounded-lg border border-black/10 p-4 dark:border-white/10">

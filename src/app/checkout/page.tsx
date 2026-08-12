@@ -19,9 +19,7 @@ export default function CheckoutPage() {
     shippingAddressLine1: '',
     shippingAddressLine2: '',
     shippingCity: '',
-    shippingState: '',
     shippingPostalCode: '',
-    shippingCountry: '',
     shippingPhone: ''
   });
   const [error, setError] = useState<string | null>(null);
@@ -126,16 +124,6 @@ export default function CheckoutPage() {
           </label>
 
           <label className="flex flex-col gap-1 text-sm">
-            State / Province
-            <input
-              required
-              value={form.shippingState}
-              onChange={(e) => update('shippingState', e.target.value)}
-              className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
-            />
-          </label>
-
-          <label className="flex flex-col gap-1 text-sm">
             Postal code
             <input
               required
@@ -144,21 +132,12 @@ export default function CheckoutPage() {
               className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
             />
           </label>
-
-          <label className="flex flex-col gap-1 text-sm">
-            Country
-            <input
-              required
-              value={form.shippingCountry}
-              onChange={(e) => update('shippingCountry', e.target.value)}
-              className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
-            />
-          </label>
         </div>
 
         <label className="flex flex-col gap-1 text-sm">
-          Phone (optional)
+          Phone
           <input
+            required
             value={form.shippingPhone}
             onChange={(e) => update('shippingPhone', e.target.value)}
             className="rounded border border-black/20 px-3 py-2 dark:border-white/20"

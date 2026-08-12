@@ -50,10 +50,8 @@ export interface Order {
   shippingAddressLine1: string;
   shippingAddressLine2?: string;
   shippingCity: string;
-  shippingState: string;
   shippingPostalCode: string;
-  shippingCountry: string;
-  shippingPhone?: string;
+  shippingPhone: string;
   subTotal: number;
   shippingCost: number;
   tax: number;
